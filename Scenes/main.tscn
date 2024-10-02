@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://7vrquhj4upbd"]
+[gd_scene load_steps=11 format=3 uid="uid://7vrquhj4upbd"]
 
 [ext_resource type="Script" path="res://Scripts/character.gd" id="1_nrwf6"]
 [ext_resource type="Script" path="res://Scripts/gimball.gd" id="4_odtai"]
+[ext_resource type="Texture2D" uid="uid://u4aydl8qw6ed" path="res://Materials/floor_4_uv.png" id="5_7nix0"]
 [ext_resource type="Texture2D" uid="uid://bwxv34o25mlfi" path="res://Sprites/character_1.png" id="6_quca3"]
+[ext_resource type="ArrayMesh" uid="uid://b7g3tniokbhum" path="res://Models/floor_4.obj" id="7_1skvg"]
 [ext_resource type="Texture2D" uid="uid://dul0obb1a5l0" path="res://Sprites/character_2.png" id="7_8ed5g"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b5lxp"]
@@ -21,6 +23,12 @@ animations = [{
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uh7fn"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skvy5"]
+albedo_texture = ExtResource("5_7nix0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2mh2"]
+albedo_texture = ExtResource("5_7nix0")
+
 [node name="main" type="Node3D"]
 
 [node name="cam_gimball" type="Node3D" parent="."]
@@ -28,12 +36,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.81712)
 script = ExtResource("4_odtai")
 
 [node name="Camera3D" type="Camera3D" parent="cam_gimball"]
-transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 18, 14)
+transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 19, 13)
 projection = 1
-size = 23.0
+size = 15.0
 
 [node name="character" type="CharacterBody3D" parent="cam_gimball"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.81712)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2.81712)
 disable_mode = 2
 script = ExtResource("1_nrwf6")
 
@@ -45,3 +53,9 @@ autoplay = "character"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="cam_gimball/character"]
 shape = SubResource("BoxShape3D_uh7fn")
+
+[node name="Floor4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_skvy5")
+material_overlay = SubResource("StandardMaterial3D_b2mh2")
+mesh = ExtResource("7_1skvg")
