@@ -2,7 +2,6 @@ extends CharacterBody3D
 
 var speed = 0.25
 var gravity = 500
-
 	
 func _physics_process(delta):	
 	var target_velocity = Vector3.ZERO
