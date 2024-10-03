@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/gimball.gd" id="1_bals3"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="2_swd6p"]
-[ext_resource type="Texture2D" uid="uid://bwxv34o25mlfi" path="res://sprites/character_1.png" id="3_5wbev"]
+[ext_resource type="Texture2D" uid="uid://4h8lg0eip4la" path="res://sprites/character_1.png" id="3_5wbev"]
 [ext_resource type="Texture2D" uid="uid://dul0obb1a5l0" path="res://sprites/character_2.png" id="4_yxqrr"]
 [ext_resource type="Texture2D" uid="uid://bbueq7jhvvsrq" path="res://materials/floor_0_uv.png" id="6_hya6b"]
 [ext_resource type="ArrayMesh" uid="uid://dvni1weagubik" path="res://models/floor.obj" id="7_fxemo"]
@@ -73,7 +73,6 @@ points = PackedVector3Array(14.4434, 19.9655, 6.70635, 6.70635, -1.18334, 13.411
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 0.2
 autostart = true
 
 [node name="cam_gimball" type="Node3D" parent="."]
