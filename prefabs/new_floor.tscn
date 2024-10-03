@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b35fhmak8j5g0"]
+[gd_scene load_steps=6 format=3 uid="uid://b35fhmak8j5g0"]
 
+[ext_resource type="Script" path="res://scripts/floor_collision.gd" id="1_ckorm"]
 [ext_resource type="ArrayMesh" uid="uid://blfvsl33g36q6" path="res://models/floor_1.obj" id="2_pqcyd"]
 [ext_resource type="Texture2D" uid="uid://bh6qjswmhgrpu" path="res://materials/floor_1_uv.png" id="3_1xmag"]
 
@@ -9,10 +10,10 @@ data = PackedVector3Array(-16.25, -0.9254, -3.75, -13.5938, -0.9254, -5.8594, -1
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ocyk"]
 albedo_texture = ExtResource("3_1xmag")
 
-[node name="new_floor" type="Node3D"]
+[node name="new_floor" type="Node3D" groups=["floors"]]
+script = ExtResource("1_ckorm")
 
-[node name="rigidbody" type="RigidBody3D" parent="."]
-collision_layer = 2
+[node name="rigidbody" type="RigidBody3D" parent="." groups=["floors"]]
 axis_lock_linear_x = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -31,3 +32,5 @@ transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 mesh = ExtResource("2_pqcyd")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ocyk")
+
+[connection signal="body_entered" from="rigidbody" to="." method="_on_collision"]

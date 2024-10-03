@@ -1,13 +1,12 @@
-[gd_scene load_steps=27 format=3 uid="uid://7vrquhj4upbd"]
+[gd_scene load_steps=26 format=3 uid="uid://7vrquhj4upbd"]
 
 [ext_resource type="Script" path="res://scripts/gimball.gd" id="1_bals3"]
-[ext_resource type="Script" path="res://scripts/game_loop.gd" id="1_pqf7j"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="2_swd6p"]
 [ext_resource type="Texture2D" uid="uid://bwxv34o25mlfi" path="res://sprites/character_1.png" id="3_5wbev"]
 [ext_resource type="Texture2D" uid="uid://dul0obb1a5l0" path="res://sprites/character_2.png" id="4_yxqrr"]
 [ext_resource type="Texture2D" uid="uid://bbueq7jhvvsrq" path="res://materials/floor_0_uv.png" id="6_hya6b"]
+[ext_resource type="Script" path="res://scripts/floor_collision.gd" id="7_31vle"]
 [ext_resource type="ArrayMesh" uid="uid://dvni1weagubik" path="res://models/floor.obj" id="7_fxemo"]
-[ext_resource type="PackedScene" uid="uid://b35fhmak8j5g0" path="res://Prefabs/new_floor.tscn" id="9_ktx5l"]
 [ext_resource type="Script" path="res://scripts/floor_handler.gd" id="10_nnce0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_la3ek"]
@@ -72,7 +71,11 @@ points = PackedVector3Array(14.9605, 23.0627, 6.70615, 13.9291, -1.18334, 4.6430
 points = PackedVector3Array(14.4434, 19.9655, 6.70635, 6.70635, -1.18334, 13.4112, 6.96333, -0.547594, 16.25, 16.507, -1.18334, 8.25569, 8.25569, 23.0627, 16.507, 16.507, 23.0627, 8.25569, 6.70635, 23.0627, 14.9586, 13.4112, -1.18334, 6.70635, 8.25569, -1.18334, 16.507, 16.25, -0.547594, 6.96333, 14.9586, 23.0627, 6.70635, 6.70635, 2.94627, 13.4112, 6.70635, 19.9655, 14.4434, 6.96333, 22.427, 16.25, 16.25, 22.427, 6.96333, 13.4112, 2.94627, 6.70635, 6.70635, 11.711, 13.9273)
 
 [node name="main" type="Node3D"]
-script = ExtResource("1_pqf7j")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.2
+autostart = true
 
 [node name="cam_gimball" type="Node3D" parent="."]
 script = ExtResource("1_bals3")
@@ -86,7 +89,8 @@ near = 0.001
 [node name="character" type="CharacterBody3D" parent="cam_gimball"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 disable_mode = 2
-collision_mask = 3
+collision_layer = 2
+collision_mask = 5
 axis_lock_linear_x = true
 slide_on_ceiling = false
 floor_constant_speed = true
@@ -108,16 +112,18 @@ autoplay = "character"
 
 [node name="floor" type="Node3D" parent="."]
 
-[node name="Floor" type="MeshInstance3D" parent="floor"]
+[node name="Floor" type="MeshInstance3D" parent="floor" groups=["floors"]]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 mesh = ExtResource("7_fxemo")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_401ny")
+script = ExtResource("7_31vle")
+
+[node name="rigidbody" type="RigidBody3D" parent="floor/Floor"]
 
 [node name="FloorBody3D" type="StaticBody3D" parent="floor"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 disable_mode = 1
-collision_mask = 3
 axis_lock_linear_x = true
 axis_lock_linear_y = true
 axis_lock_linear_z = true
@@ -131,7 +137,7 @@ shape = SubResource("CylinderShape3D_ja3wy")
 
 [node name="WallBody3D" type="StaticBody3D" parent="floor"]
 transform = Transform3D(0.595, 0, 0, 0, 0.595, 0, 0, 0, 0.595, 0, 0.05, 0)
-visible = false
+collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor/WallBody3D"]
 shape = SubResource("ConvexPolygonShape3D_ev8rt")
@@ -185,11 +191,6 @@ disabled = true
 shape = SubResource("ConvexPolygonShape3D_0vkxa")
 disabled = true
 
-[node name="floor_spawn_point" type="Node3D" parent="."]
+[node name="floor_spawn_point" type="Node3D" parent="." groups=["spawners"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
 script = ExtResource("10_nnce0")
-
-[node name="Timer" type="Timer" parent="floor_spawn_point"]
-wait_time = 7.0
-
-[node name="new_floor" parent="floor_spawn_point" instance=ExtResource("9_ktx5l")]
