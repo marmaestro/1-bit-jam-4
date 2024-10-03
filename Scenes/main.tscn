@@ -1,11 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://7vrquhj4upbd"]
+[gd_scene load_steps=25 format=3 uid="uid://7vrquhj4upbd"]
 
 [ext_resource type="Script" path="res://scripts/gimball.gd" id="1_bals3"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="2_swd6p"]
 [ext_resource type="Texture2D" uid="uid://bwxv34o25mlfi" path="res://sprites/character_1.png" id="3_5wbev"]
 [ext_resource type="Texture2D" uid="uid://dul0obb1a5l0" path="res://sprites/character_2.png" id="4_yxqrr"]
 [ext_resource type="Texture2D" uid="uid://bbueq7jhvvsrq" path="res://materials/floor_0_uv.png" id="6_hya6b"]
-[ext_resource type="Script" path="res://scripts/floor_collision.gd" id="7_31vle"]
 [ext_resource type="ArrayMesh" uid="uid://dvni1weagubik" path="res://models/floor.obj" id="7_fxemo"]
 [ext_resource type="Script" path="res://scripts/floor_handler.gd" id="10_nnce0"]
 
@@ -117,7 +116,6 @@ transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 mesh = ExtResource("7_fxemo")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_401ny")
-script = ExtResource("7_31vle")
 
 [node name="rigidbody" type="RigidBody3D" parent="floor/Floor"]
 

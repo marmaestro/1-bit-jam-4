@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://tcnfml2qflph"]
 
-[ext_resource type="Script" path="res://scripts/floor_collision.gd" id="1_ckorm"]
+[ext_resource type="Script" path="res://scripts/floor_collision.gd" id="1_d43ub"]
 [ext_resource type="ArrayMesh" uid="uid://blfvsl33g36q6" path="res://models/floor_1.obj" id="2_pqcyd"]
 [ext_resource type="Texture2D" uid="uid://bh6qjswmhgrpu" path="res://materials/floor_1_uv.png" id="3_1xmag"]
 
@@ -11,7 +11,7 @@ data = PackedVector3Array(-16.25, -0.9254, -3.75, -13.5938, -0.9254, -5.8594, -1
 albedo_texture = ExtResource("3_1xmag")
 
 [node name="new_floor" type="Node3D" groups=["floors"]]
-script = ExtResource("1_ckorm")
+script = ExtResource("1_d43ub")
 
 [node name="rigidbody" type="RigidBody3D" parent="." groups=["floors"]]
 axis_lock_linear_x = true
