@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dvni1weagubik"
+path="res://.godot/imported/floor_0.obj-38d63e185e8cc21dfb32f25431d2bb29.mesh"
+
+[deps]
+
+files=["res://.godot/imported/floor_0.obj-38d63e185e8cc21dfb32f25431d2bb29.mesh"]
+
+source_file="res://models/floor_0.obj"
+dest_files=["res://.godot/imported/floor_0.obj-38d63e185e8cc21dfb32f25431d2bb29.mesh", "res://.godot/imported/floor_0.obj-38d63e185e8cc21dfb32f25431d2bb29.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
