@@ -1,10 +1,10 @@
 extends CharacterBody3D
 
 var speed = 0.25
-var gravity = 1000
+var gravity = 500
 
 	
-func _physics_process(delta):
+func _physics_process(delta):	
 	var target_velocity = Vector3.ZERO
 	target_velocity.y += -gravity * delta
 	velocity = target_velocity

@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://d305rhep7x8sf"]
+
+[ext_resource type="ArrayMesh" uid="uid://dvni1weagubik" path="res://models/floor.obj" id="1_5ib75"]
+[ext_resource type="Texture2D" uid="uid://bbueq7jhvvsrq" path="res://materials/floor_0_uv.png" id="2_te506"]
+[ext_resource type="Script" path="res://scripts/character.gd" id="3_eur56"]
+[ext_resource type="Script" path="res://scripts/gimball.gd" id="3_i5kdq"]
+[ext_resource type="Texture2D" uid="uid://bwxv34o25mlfi" path="res://sprites/character_1.png" id="4_ngaba"]
+[ext_resource type="Texture2D" uid="uid://dul0obb1a5l0" path="res://sprites/character_2.png" id="5_nc2ib"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kkmig"]
+albedo_texture = ExtResource("2_te506")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v3765"]
+points = PackedVector3Array(-7.50147, -0.925412, -16.25, -9.69019, -0.925412, -14.0645, -7.50147, -0.323115, -16.25, 7.49829, -0.925412, -16.25, -14.0645, -0.925412, -9.69019, -9.69019, -0.323115, -14.0645, -6.99246, -0.156258, -15.3815, 7.49829, -0.323115, -16.25, 9.68701, -0.925412, -14.0645, -16.25, -0.925412, -7.50147, -14.0645, -0.323115, -9.69019, -11.1886, -0.156258, -11.1886, 0, 0, 0, 6.98928, -0.156258, -15.3815, 9.68701, -0.323115, -14.0645, 16.25, -0.925412, -7.50147, -16.25, -0.925412, 7.49829, -16.25, -0.323115, -7.50147, -15.3815, -0.156258, -6.99246, -15.3815, -0.156258, 6.98928, -11.1886, -0.156258, 11.1854, -6.99246, -0.156258, 15.3783, 6.98928, -0.156258, 15.3783, 11.1854, -0.156258, 11.1854, 15.3783, -0.156258, 6.98928, 15.3783, -0.156258, -6.99246, 11.1854, -0.156258, -11.1886, 16.25, -0.323115, -7.50147, 16.25, -0.925412, 7.49829, -16.25, -0.323115, 7.49829, -14.0645, -0.925412, 9.68701, -14.0645, -0.323115, 9.68701, -7.50147, -0.323115, 16.25, 7.49829, -0.323115, 16.25, 16.25, -0.323115, 7.49829, 7.49829, -0.925412, 16.25, -7.50147, -0.925412, 16.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b7o21"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kwlfp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ngaba")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nc2ib")
+}],
+"loop": true,
+"name": &"character",
+"speed": 5.0
+}]
+
+[node name="me mato" type="Node3D"]
+script = ExtResource("3_i5kdq")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+mesh = ExtResource("1_5ib75")
+surface_material_override/0 = SubResource("StandardMaterial3D_kkmig")
+
+[node name="FloorBody3D" type="StaticBody3D" parent="Floor"]
+disable_mode = 1
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/FloorBody3D"]
+shape = SubResource("ConvexPolygonShape3D_v3765")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.857167, 0.515038, 0, -0.515038, 0.857167, 0, 16.214, 25)
+fov = 43.1
+
+[node name="character" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+disable_mode = 2
+axis_lock_linear_x = true
+slide_on_ceiling = false
+floor_constant_speed = true
+floor_max_angle = 0.0174533
+safe_margin = 0.1
+script = ExtResource("3_eur56")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="character"]
+process_mode = 1
+physics_interpolation_mode = 1
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_b7o21")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="character"]
+transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_kwlfp")
+animation = &"character"
+autoplay = "character"
