@@ -83,6 +83,8 @@ size = 25.0
 [node name="character" type="CharacterBody3D" parent="cam_gimball"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 disable_mode = 2
+collision_layer = 3
+collision_mask = 3
 axis_lock_linear_x = true
 slide_on_ceiling = false
 floor_constant_speed = true
@@ -126,6 +128,8 @@ shape = SubResource("CylinderShape3D_ja3wy")
 
 [node name="WallBody3D" type="StaticBody3D" parent="floor"]
 transform = Transform3D(0.595, 0, 0, 0, 0.595, 0, 0, 0, 0.595, 0, 0.05, 0)
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor/WallBody3D"]
 shape = SubResource("ConvexPolygonShape3D_ev8rt")
