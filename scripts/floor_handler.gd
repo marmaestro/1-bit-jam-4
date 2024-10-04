@@ -1,5 +1,6 @@
 extends Node3D
 
+var survived_floors = -1
 var rng = RandomNumberGenerator.new()
 @onready var timer = $"../Timer"
 
@@ -11,7 +12,10 @@ var new_floor
 
 func _ready():
 	timer.start()
-	timer.timeout.connect(create_floor)
+	
+func _on_timeout():
+	survived_floors += 1
+	create_floor()
 	
 func create_floor():
 	new_floor = new_floor_scene.instantiate()
@@ -24,3 +28,4 @@ func create_floor():
 	
 	new_floor.get_child(0).get_child(0).make_convex_from_siblings()	
 	add_child(new_floor)
+	

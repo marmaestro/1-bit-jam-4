@@ -14,14 +14,17 @@ albedo_texture = ExtResource("3_1xmag")
 script = ExtResource("1_d43ub")
 
 [node name="rigidbody" type="RigidBody3D" parent="." groups=["floors"]]
+disable_mode = 1
 axis_lock_linear_x = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-mass = 10.0
+mass = 5.0
 gravity_scale = 0.25
 lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 1
 
 [node name="collider" type="CollisionShape3D" parent="rigidbody"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
@@ -33,4 +36,4 @@ mesh = ExtResource("2_pqcyd")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ocyk")
 
-[connection signal="body_entered" from="rigidbody" to="." method="_on_collision"]
+[connection signal="body_shape_entered" from="rigidbody" to="." method="_on_rigidbody_body_shape_entered"]

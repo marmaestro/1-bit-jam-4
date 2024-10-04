@@ -1,14 +1,20 @@
-[gd_scene load_steps=25 format=3 uid="uid://7vrquhj4upbd"]
+[gd_scene load_steps=31 format=3 uid="uid://7vrquhj4upbd"]
 
 [ext_resource type="Script" path="res://scripts/gimball.gd" id="1_bals3"]
+[ext_resource type="Script" path="res://scripts/game_loop.gd" id="1_v858x"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="2_swd6p"]
 [ext_resource type="Texture2D" uid="uid://4h8lg0eip4la" path="res://sprites/character_1.png" id="3_5wbev"]
 [ext_resource type="Texture2D" uid="uid://dul0obb1a5l0" path="res://sprites/character_2.png" id="4_yxqrr"]
 [ext_resource type="Texture2D" uid="uid://bbueq7jhvvsrq" path="res://materials/floor_0_uv.png" id="6_hya6b"]
 [ext_resource type="ArrayMesh" uid="uid://dvni1weagubik" path="res://models/floor.obj" id="7_fxemo"]
+[ext_resource type="StyleBox" uid="uid://c6jjixbxfis8q" path="res://styles/button_hover.tres" id="9_0fyir"]
+[ext_resource type="Texture2D" uid="uid://bmlcrht4au1b7" path="res://sprites/exit.svg" id="9_8fe83"]
+[ext_resource type="StyleBox" uid="uid://p7nv04qdasuf" path="res://styles/button_pressed.tres" id="10_bq8p6"]
 [ext_resource type="Script" path="res://scripts/floor_handler.gd" id="10_nnce0"]
+[ext_resource type="StyleBox" uid="uid://ba6m5ystp3ldt" path="res://styles/button_normal.tres" id="11_t41m0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_la3ek"]
+size = Vector3(1, 0.247192, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t1xi2"]
 animations = [{
@@ -69,10 +75,15 @@ points = PackedVector3Array(14.9605, 23.0627, 6.70615, 13.9291, -1.18334, 4.6430
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0vkxa"]
 points = PackedVector3Array(14.4434, 19.9655, 6.70635, 6.70635, -1.18334, 13.4112, 6.96333, -0.547594, 16.25, 16.507, -1.18334, 8.25569, 8.25569, 23.0627, 16.507, 16.507, 23.0627, 8.25569, 6.70635, 23.0627, 14.9586, 13.4112, -1.18334, 6.70635, 8.25569, -1.18334, 16.507, 16.25, -0.547594, 6.96333, 14.9586, 23.0627, 6.70635, 6.70635, 2.94627, 13.4112, 6.70635, 19.9655, 14.4434, 6.96333, 22.427, 16.25, 16.25, 22.427, 6.96333, 13.4112, 2.94627, 6.70635, 6.70635, 11.711, 13.9273)
 
+[sub_resource type="SystemFont" id="SystemFont_upufv"]
+subpixel_positioning = 0
+
 [node name="main" type="Node3D"]
+script = ExtResource("1_v858x")
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
+wait_time = 7.0
 autostart = true
 
 [node name="cam_gimball" type="Node3D" parent="."]
@@ -100,6 +111,7 @@ script = ExtResource("2_swd6p")
 process_mode = 1
 physics_interpolation_mode = 1
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+visible = false
 shape = SubResource("BoxShape3D_la3ek")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="cam_gimball/character"]
@@ -191,3 +203,120 @@ disabled = true
 [node name="floor_spawn_point" type="Node3D" parent="." groups=["spawners"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
 script = ExtResource("10_nnce0")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="game_over_screen" type="Control" parent="HUD"]
+visible = false
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="game_over" type="RichTextLabel" parent="HUD/game_over_screen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -274.5
+offset_top = -165.0
+offset_right = 274.5
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/normal_font = SubResource("SystemFont_upufv")
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/bold_font_size = 60
+bbcode_enabled = true
+text = "[center][b]GAME OVER"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+language = "en"
+
+[node name="message" type="RichTextLabel" parent="HUD/game_over_screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -274.5
+offset_top = -69.0
+offset_right = 274.5
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = SubResource("SystemFont_upufv")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]You survived
+%d floors"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+language = "en"
+
+[node name="play_again" type="Button" parent="HUD/game_over_screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.5
+offset_top = 146.0
+offset_right = 112.5
+offset_bottom = 221.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = ExtResource("9_0fyir")
+theme_override_styles/pressed = ExtResource("10_bq8p6")
+theme_override_styles/normal = ExtResource("11_t41m0")
+action_mode = 0
+text = "PLAY AGAIN"
+
+[node name="background" type="Sprite2D" parent="HUD/game_over_screen/play_again"]
+modulate = Color(1, 1, 1, 0.25098)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_hya6b")
+
+[node name="exit" type="Button" parent="HUD/game_over_screen"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 501.0
+offset_top = -279.0
+offset_right = 531.0
+offset_bottom = -249.0
+grow_horizontal = 0
+theme_override_styles/hover = ExtResource("9_0fyir")
+theme_override_styles/pressed = ExtResource("10_bq8p6")
+theme_override_styles/normal = ExtResource("11_t41m0")
+action_mode = 0
+icon = ExtResource("9_8fe83")
+icon_alignment = 2
+vertical_icon_alignment = 0
+expand_icon = true
+
+[connection signal="timeout" from="Timer" to="floor_spawn_point" method="_on_timeout"]
+[connection signal="pressed" from="HUD/game_over_screen/play_again" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="HUD/game_over_screen/exit" to="." method="_on_exit_pressed"]
