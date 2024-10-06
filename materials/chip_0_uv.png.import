@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqhbxwcrq1okm"
-path.s3tc="res://.godot/imported/floor_2_uv.png-758a040bf4a8fee8a66849b3616a2fbf.s3tc.ctex"
+uid="uid://c4rkmujis3gd1"
+path.s3tc="res://.godot/imported/chip_0_uv.png-ad328b12ead0633b5f58be3b7b01b7a2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://materials/floor_2_uv.png"
-dest_files=["res://.godot/imported/floor_2_uv.png-758a040bf4a8fee8a66849b3616a2fbf.s3tc.ctex"]
+source_file="res://materials/chip_0_uv.png"
+dest_files=["res://.godot/imported/chip_0_uv.png-ad328b12ead0633b5f58be3b7b01b7a2.s3tc.ctex"]
 
 [params]
 

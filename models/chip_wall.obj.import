@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ce7dcj1k2aknq"
+path="res://.godot/imported/chip_wall.obj-87b0cd01ebabc3762e25387976d55755.mesh"
+
+[deps]
+
+files=["res://.godot/imported/chip_wall.obj-87b0cd01ebabc3762e25387976d55755.mesh"]
+
+source_file="res://models/chip_wall.obj"
+dest_files=["res://.godot/imported/chip_wall.obj-87b0cd01ebabc3762e25387976d55755.mesh", "res://.godot/imported/chip_wall.obj-87b0cd01ebabc3762e25387976d55755.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
