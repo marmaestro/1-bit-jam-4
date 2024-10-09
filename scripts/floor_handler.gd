@@ -18,6 +18,7 @@ func _on_timeout():
 	create_floor()
 	
 func create_floor():
+	if (survived_floors == 0): $SpotLight3D.visible = true
 	new_floor = new_floor_scene.instantiate()
 	var floor_n = randi_range(0, 4)
 	new_floor.name = str(Time.get_ticks_msec())
