@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmlcrht4au1b7"
-path="res://.godot/imported/exit.svg-f1a7e9e78b7990416807b29f130688b7.ctex"
+uid="uid://di88gawdegjft"
+path="res://.godot/imported/chip_render_pixel.png-3f4e66672738baaca170e124de192586.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/exit.svg"
-dest_files=["res://.godot/imported/exit.svg-f1a7e9e78b7990416807b29f130688b7.ctex"]
+source_file="res://sprites/chip_render_pixel.png"
+dest_files=["res://.godot/imported/chip_render_pixel.png-3f4e66672738baaca170e124de192586.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

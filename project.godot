@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="1 BIT JAM 4"
+config/name="Falling Casino"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://sprites/icon.svg"
+config/icon="res://sprites/chip_render_pixel.png"
 
 [global_group]
 
