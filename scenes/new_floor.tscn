@@ -31,6 +31,7 @@ shape = SubResource("ConcavePolygonShape3D_2afmu")
 
 [node name="mesh" type="MeshInstance3D" parent="rigidbody"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+layers = 2
 material_override = ExtResource("2_hhon4")
 mesh = ExtResource("2_dixqg")
 skeleton = NodePath("../../../..")

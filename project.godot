@@ -44,6 +44,8 @@ move_forward={
 
 [layer_names]
 
+3d_render/layer_1="static_floor"
+3d_render/layer_2="falling_floor"
 3d_physics/layer_1="character"
 3d_physics/layer_2="falling_objects"
 3d_physics/layer_3="static_objects"
