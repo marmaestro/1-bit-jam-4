@@ -15,11 +15,6 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://sprites/chip_render_pixel.png"
 
-[global_group]
-
-floors=""
-spawners=""
-
 [input]
 
 move_right={
@@ -49,5 +44,7 @@ move_forward={
 
 [layer_names]
 
-3d_physics/layer_1="main"
+3d_physics/layer_1="character"
 3d_physics/layer_2="falling_objects"
+3d_physics/layer_3="static_objects"
+3d_physics/layer_4="wall_collider"
