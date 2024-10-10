@@ -5,7 +5,7 @@ var gravity = 500
 
 @onready var main = $"../.."
 	
-func _physics_process(delta):	
+func _physics_process(delta):
 	var target_velocity = Vector3.ZERO
 	target_velocity.y += -gravity * delta
 	velocity = target_velocity

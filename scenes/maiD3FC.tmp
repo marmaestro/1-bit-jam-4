@@ -1,80 +1,134 @@
-[gd_scene load_steps=21 format=3 uid="uid://j6mlkjf3oagj"]
+[gd_scene load_steps=28 format=3 uid="uid://7vrquhj4upbd"]
 
-[ext_resource type="Environment" uid="uid://5j164u68na1t" path="res://styles/world.tres" id="1_q3mxp"]
-[ext_resource type="Script" path="res://scripts/game_loop.gd" id="2_qdbgh"]
-[ext_resource type="ArrayMesh" uid="uid://c7aq7q21o46cu" path="res://models/chip_0.obj" id="4_a6bmg"]
-[ext_resource type="Texture2D" uid="uid://c4rkmujis3gd1" path="res://materials/chip_0_uv.png" id="5_23xt5"]
-[ext_resource type="Script" path="res://scripts/floor_handler.gd" id="6_d4cnl"]
-[ext_resource type="StyleBox" uid="uid://c6jjixbxfis8q" path="res://styles/button_hover.tres" id="7_qc84r"]
-[ext_resource type="StyleBox" uid="uid://p7nv04qdasuf" path="res://styles/button_pressed.tres" id="8_g7wm6"]
-[ext_resource type="StyleBox" uid="uid://ba6m5ystp3ldt" path="res://styles/button_normal.tres" id="9_7fm0n"]
+[ext_resource type="Script" path="res://scripts/gimball.gd" id="1_bals3"]
+[ext_resource type="Environment" uid="uid://5j164u68na1t" path="res://styles/world.tres" id="1_balxq"]
+[ext_resource type="Script" path="res://scripts/game_loop.gd" id="1_v858x"]
+[ext_resource type="Script" path="res://scripts/character.gd" id="2_swd6p"]
+[ext_resource type="Texture2D" uid="uid://4h8lg0eip4la" path="res://sprites/character_1.png" id="3_5wbev"]
+[ext_resource type="Texture2D" uid="uid://dul0obb1a5l0" path="res://sprites/character_2.png" id="4_yxqrr"]
+[ext_resource type="ArrayMesh" uid="uid://c7aq7q21o46cu" path="res://models/chip_0.obj" id="6_ufv4e"]
+[ext_resource type="Texture2D" uid="uid://c4rkmujis3gd1" path="res://materials/uvs/chip_0_uv.png" id="7_m8ywg"]
+[ext_resource type="StyleBox" uid="uid://c6jjixbxfis8q" path="res://styles/button_hover.tres" id="9_0fyir"]
+[ext_resource type="StyleBox" uid="uid://p7nv04qdasuf" path="res://styles/button_pressed.tres" id="10_bq8p6"]
+[ext_resource type="Script" path="res://scripts/floor_handler.gd" id="10_nnce0"]
+[ext_resource type="StyleBox" uid="uid://ba6m5ystp3ldt" path="res://styles/button_normal.tres" id="11_t41m0"]
+[ext_resource type="Texture2D" uid="uid://ceuyypn78upo1" path="res://sprites/exit.png" id="12_riu6h"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_koy1u"]
-albedo_texture = ExtResource("5_23xt5")
+[sub_resource type="BoxShape3D" id="BoxShape3D_la3ek"]
+size = Vector3(1, 0.425232, 1)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ofb4t"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_t1xi2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5wbev")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yxqrr")
+}],
+"loop": true,
+"name": &"character",
+"speed": 5.0
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v658w"]
+albedo_texture = ExtResource("7_m8ywg")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wfwog"]
 points = PackedVector3Array(-1.3928, -0.35281, -4.19624, -2.93818, -0.35281, -3.30409, -1.3928, 0, -4.19624, 1.39195, -0.35281, -4.19624, -4.33013, -0.35281, -0.892975, -2.93818, 0, -3.30409, 1.39195, 0, -4.19624, 2.93733, -0.35281, -3.30409, -4.33013, 0, -0.892975, -4.33013, -0.35281, 0.892154, 2.93733, 0, -3.30409, 4.33013, -0.35281, -0.892975, -4.33013, 0, 0.892154, -2.93818, -0.35281, 3.30327, 4.33013, 0, -0.892975, 4.33013, -0.35281, 0.892154, -2.93818, 0, 3.30327, -1.3928, -0.35281, 4.19624, 4.33013, 0, 0.892154, 2.93733, -0.35281, 3.30327, -1.3928, 0, 4.19624, 1.39195, -0.35281, 4.19624, 2.93733, 0, 3.30327, 1.39195, 0, 4.19624)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kghrh"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3s4q8"]
 points = PackedVector3Array(2.89175, 7.07738, 3.50237, 0.03529, -3.07738, 3.50237, 0.03529, -3.07738, 4.29572, 3.20927, -3.07738, 3.18497, 0.03529, 7.07738, 3.50237, 1.62228, 7.07738, 4.29572, 2.25702, 7.07738, 2.86743, 1.62228, -3.07738, 4.29572, 2.25702, -3.07738, 2.86743, 0.03529, 7.07738, 4.29572, 3.18314, 6.99376, 2.87919, 2.73299, -3.07738, 3.66079, 3.18314, -2.99376, 2.87919, 3.20927, 7.07738, 3.18497, 2.73299, 7.07738, 3.66079)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tprx7"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6rl3u"]
 points = PackedVector3Array(4.47942, -3.07738, 0.962872, 3.3687, 7.07738, 2.86729, 2.41593, 7.07738, 2.86729, 3.68562, 7.07738, 0.169144, 2.41593, -3.07738, 2.70855, 3.68562, -3.07738, 0.169144, 4.47942, 7.07738, 0.169144, 3.3687, -3.07738, 2.86729, 4.47942, 7.07738, 0.962872, 4.47942, -3.07738, 0.169144, 3.52665, 7.07738, 2.70855, 2.41593, 7.07738, 2.70855, 2.41593, -3.07738, 2.86729, 4.1617, -3.07738, 1.59733, 3.52665, -3.07738, 2.70855, 4.1617, 7.07738, 1.59733)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dcg7l"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_omfhx"]
 points = PackedVector3Array(3.52704, -3.07738, -2.68787, 4.47942, 7.07738, 0.16888, 3.68571, 7.07738, 0.16888, 3.36837, 7.07738, -2.84699, 2.57466, -3.07738, -2.52935, 4.47942, -3.07738, 0.16888, 2.57466, 7.07738, -2.52935, 4.47942, 7.07738, -0.942589, 3.68571, -3.07738, 0.16888, 4.47942, -3.07738, -0.942589, 2.64603, -2.69689, -2.73399, 4.16171, 7.07738, -1.5767, 3.36837, -3.07738, -2.84699, 2.64603, 6.69689, -2.73399, 3.52704, 7.07738, -2.68787, 4.16171, -3.07738, -1.5767)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_50r3t"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7cwps"]
 points = PackedVector3Array(3.20927, 7.07738, -3.16464, 0.03529, -3.07738, -4.27543, 0.03529, -3.07738, -3.64055, 0.03529, 7.07738, -4.27543, 1.93949, -3.07738, -4.1166, 3.18509, -3, -2.85802, 2.25702, 7.07738, -2.84713, 1.62228, 7.07738, -4.27543, 0.03529, 7.07738, -3.64055, 3.05051, -3.07738, -3.48201, 2.25702, -3.07738, -2.84713, 3.05051, 7.07738, -3.48201, 3.18509, 7, -2.85802, 1.62228, -3.07738, -4.27543, 3.20927, -3.07738, -3.16464, 1.93949, 7.07738, -4.1166)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hfeh6"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4807r"]
 points = PackedVector3Array(-1.55201, 7.07738, 4.29572, -2.50421, -3.07738, 2.86743, -2.50421, -3.07738, 3.66079, 0.0344824, -3.07738, 4.29572, 0.0344824, 7.07738, 3.50237, -2.50421, 7.07738, 2.86743, 0.0344824, -3.07738, 3.50237, 0.0344824, 7.07738, 4.29572, -1.55201, -3.07738, 4.29572, -2.50421, 7.07738, 3.66079, -2.18681, -3.07738, 2.86743, -2.18681, 7.07738, 2.86743, -2.18681, -3.07738, 3.97819, -2.18681, 7.07738, 3.97819)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hftvx"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0ac4t"]
 points = PackedVector3Array(-4.25044, -3.07738, 1.43909, -2.57601, 6.69819, 3.51277, -2.66373, 7.07738, 3.66094, -3.7743, 7.07738, -0.307311, -2.50489, -3.07738, 2.54963, -4.40947, 7.07738, 1.12135, -3.7743, -3.07738, -0.307311, -2.98103, -3.07738, 3.50207, -4.3301, -2.65422, -0.141951, -2.50489, 7.07738, 2.54963, -3.13987, 7.07738, 3.3432, -4.3301, 6.65422, -0.141951, -2.66373, -3.07738, 3.66094, -4.40947, -3.07738, 1.12135, -3.13987, -3.07738, 3.3432, -3.61564, 7.07738, 2.54963, -2.57601, -2.6982, 3.51277, -2.98103, 7.07738, 3.50207, -4.25044, 7.07738, 1.43909, -3.61564, -3.07738, 2.54963)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0sj6y"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_g5lpw"]
 points = PackedVector3Array(-3.29852, -3.07738, -2.84699, -3.7743, 7.07738, -0.307311, -4.3301, 6.65422, -0.413142, -2.50489, 7.07738, -2.84699, -3.7743, -3.07738, -0.307311, -2.50489, -3.07738, -2.68789, -3.61564, 7.07738, -2.52904, -4.40947, -3.07738, -1.10133, -4.40947, 7.07738, -1.10133, -4.3301, -2.65422, -0.413142, -2.98103, 7.07738, -1.73551, -3.29852, 7.07738, -2.84699, -3.61564, -3.07738, -2.52904, -2.50489, -3.07738, -2.84699, -4.09179, -3.07738, -1.73551, -2.50489, 7.07738, -2.68789, -2.98103, -3.07738, -1.73551, -4.09179, 7.07738, -1.73551)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_bi1dt"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cr66p"]
 points = PackedVector3Array(-1.5524, 7.07738, -4.27543, -3.29835, -3.07738, -3.00596, -3.16986, -2.68592, -2.90219, 0.0349793, -3.07738, -4.27543, 0.0349793, 7.07738, -3.64055, -3.29835, 7.07738, -3.00596, -2.18703, -3.07738, -2.84713, -1.5524, -3.07738, -4.27543, 0.0349793, -3.07738, -3.64055, -2.18703, 7.07738, -2.84713, 0.0349793, 7.07738, -4.27543, -2.98055, 7.07738, -3.48201, -2.5045, -3.07738, -3.79923, -3.13945, -3.07738, -3.32332, -3.16986, 6.68592, -2.90219, -2.5045, 7.07738, -3.79923, -3.13945, 7.07738, -3.32332, -2.98055, -3.07738, -3.48201)
 
-[sub_resource type="SystemFont" id="SystemFont_wrxpf"]
+[sub_resource type="SystemFont" id="SystemFont_upufv"]
 subpixel_positioning = 0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hgccq"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6tfrl"]
 
-[node name="start" type="WorldEnvironment"]
-environment = ExtResource("1_q3mxp")
-script = ExtResource("2_qdbgh")
+[node name="main" type="WorldEnvironment"]
+environment = ExtResource("1_balxq")
+script = ExtResource("1_v858x")
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 0.5
+wait_time = 5.0
 autostart = true
+metadata/running = true
 
 [node name="cam_gimball" type="Node3D" parent="."]
+script = ExtResource("1_bals3")
 
 [node name="Camera3D" type="Camera3D" parent="cam_gimball"]
 transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 30, 16)
 projection = 1
 current = true
-size = 50.0
+size = 27.5
 near = 0.001
 
-[node name="floor" type="Node3D" parent="."]
+[node name="character" type="CharacterBody3D" parent="cam_gimball"]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+visible = false
+disable_mode = 2
+collision_mask = 14
+axis_lock_linear_x = true
+slide_on_ceiling = false
+floor_constant_speed = true
+floor_max_angle = 0.0174533
+safe_margin = 1.0
+script = ExtResource("2_swd6p")
 
-[node name="Floor" type="MeshInstance3D" parent="floor" groups=["floors"]]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="cam_gimball/character"]
+process_mode = 1
+physics_interpolation_mode = 1
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_la3ek")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="cam_gimball/character"]
+transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_t1xi2")
+animation = &"character"
+autoplay = "character"
+
+[node name="floor" type="Node3D" parent="."]
+process_mode = 1
+
+[node name="Floor" type="MeshInstance3D" parent="floor"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-mesh = ExtResource("4_a6bmg")
+mesh = ExtResource("6_ufv4e")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_koy1u")
+surface_material_override/0 = SubResource("StandardMaterial3D_v658w")
 
 [node name="rigidbody" type="RigidBody3D" parent="floor/Floor"]
+collision_layer = 4
+collision_mask = 7
 
 [node name="FloorBody3D" type="StaticBody3D" parent="floor"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 disable_mode = 1
+collision_layer = 4
+collision_mask = 7
 axis_lock_linear_x = true
 axis_lock_linear_y = true
 axis_lock_linear_z = true
@@ -84,81 +138,97 @@ axis_lock_angular_z = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor/FloorBody3D"]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_ofb4t")
+shape = SubResource("ConvexPolygonShape3D_wfwog")
 
 [node name="WallBody3D" type="StaticBody3D" parent="floor"]
 transform = Transform3D(0.665, 0, 0, 0, 0.665, 0, 0, 0, 0.665, 0, 0.05, 0)
-collision_layer = 4
+visible = false
+collision_layer = 8
 
 [node name="CollisionShape3D8" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(2.52101, 0, 0, 0, 2.52101, 0, 0, 0, 2.52101, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_kghrh")
+shape = SubResource("ConvexPolygonShape3D_3s4q8")
 
 [node name="CollisionShape3D7" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(2.52101, 0, 0, 0, 2.52101, 0, 0, 0, 2.52101, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_tprx7")
+shape = SubResource("ConvexPolygonShape3D_6rl3u")
 
 [node name="CollisionShape3D6" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(2.52101, 0, 0, 0, 2.52101, 0, 0, 0, 2.52101, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_dcg7l")
+shape = SubResource("ConvexPolygonShape3D_omfhx")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(2.52101, 0, 0, 0, 2.52101, 0, 0, 0, 2.52101, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_50r3t")
+shape = SubResource("ConvexPolygonShape3D_7cwps")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(2.52101, 0, 0, 0, 2.52101, 0, 0, 0, 2.52101, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_hfeh6")
+shape = SubResource("ConvexPolygonShape3D_4807r")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(2.52101, 0, 0, 0, 2.52101, 0, 0, 0, 2.52101, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_hftvx")
+shape = SubResource("ConvexPolygonShape3D_0ac4t")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(2.52101, 0, 0, 0, 2.52101, 0, 0, 0, 2.52101, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_0sj6y")
+shape = SubResource("ConvexPolygonShape3D_g5lpw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(2.52101, 0, 0, 0, 2.52101, 0, 0, 0, 2.52101, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_bi1dt")
+shape = SubResource("ConvexPolygonShape3D_cr66p")
 
 [node name="CollisionShape3D9" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(-1.10197e-07, 0, 2.52101, 0, 2.52101, 0, -2.52101, 0, -1.10197e-07, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_kghrh")
+shape = SubResource("ConvexPolygonShape3D_3s4q8")
 
 [node name="CollisionShape3D10" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(-1.10197e-07, 0, 2.52101, 0, 2.52101, 0, -2.52101, 0, -1.10197e-07, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_tprx7")
+shape = SubResource("ConvexPolygonShape3D_6rl3u")
 
 [node name="CollisionShape3D11" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(-1.10197e-07, 0, 2.52101, 0, 2.52101, 0, -2.52101, 0, -1.10197e-07, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_dcg7l")
+shape = SubResource("ConvexPolygonShape3D_omfhx")
 
 [node name="CollisionShape3D12" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(-1.10197e-07, 0, 2.52101, 0, 2.52101, 0, -2.52101, 0, -1.10197e-07, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_50r3t")
+shape = SubResource("ConvexPolygonShape3D_7cwps")
 
 [node name="CollisionShape3D13" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(-1.10197e-07, 0, 2.52101, 0, 2.52101, 0, -2.52101, 0, -1.10197e-07, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_hfeh6")
+shape = SubResource("ConvexPolygonShape3D_4807r")
 
 [node name="CollisionShape3D14" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(-1.10197e-07, 0, 2.52101, 0, 2.52101, 0, -2.52101, 0, -1.10197e-07, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_hftvx")
+shape = SubResource("ConvexPolygonShape3D_0ac4t")
 
 [node name="CollisionShape3D15" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(-1.10197e-07, 0, 2.52101, 0, 2.52101, 0, -2.52101, 0, -1.10197e-07, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_0sj6y")
+shape = SubResource("ConvexPolygonShape3D_g5lpw")
 
 [node name="CollisionShape3D16" type="CollisionShape3D" parent="floor/WallBody3D"]
 transform = Transform3D(-1.10197e-07, 0, 2.52101, 0, 2.52101, 0, -2.52101, 0, -1.10197e-07, 0, -0.0840336, 0)
-shape = SubResource("ConvexPolygonShape3D_bi1dt")
+shape = SubResource("ConvexPolygonShape3D_cr66p")
 
-[node name="floor_spawn_point" type="Node3D" parent="." groups=["spawners"]]
+[node name="floor_spawn_point" type="Node3D" parent="."]
+process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
-script = ExtResource("6_d4cnl")
+script = ExtResource("10_nnce0")
+
+[node name="SpotLight3D" type="DirectionalLight3D" parent="floor_spawn_point"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15, 0)
+light_energy = 5.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_cull_mask = 4293918722
+shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 50.0
+directional_shadow_pancake_size = 0.0
+sky_mode = 1
 
 [node name="HUD" type="Control" parent="."]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -177,7 +247,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="game_title" type="RichTextLabel" parent="HUD/game_start_screen"]
+[node name="game_over" type="RichTextLabel" parent="HUD/game_start_screen"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -190,7 +260,7 @@ offset_right = 274.5
 offset_bottom = -27.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/normal_font = SubResource("SystemFont_wrxpf")
+theme_override_fonts/normal_font = SubResource("SystemFont_upufv")
 theme_override_font_sizes/normal_font_size = 50
 theme_override_font_sizes/bold_font_size = 60
 bbcode_enabled = true
@@ -215,10 +285,10 @@ offset_right = 274.5
 offset_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/normal_font = SubResource("SystemFont_wrxpf")
+theme_override_fonts/normal_font = SubResource("SystemFont_upufv")
 theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
-text = "[center]Avoid getting hit by the chips!!"
+text = "[center]Avoid getting hit by the falling chips!!"
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
@@ -239,17 +309,124 @@ offset_right = 112.5
 offset_bottom = 221.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-theme_override_styles/hover = ExtResource("7_qc84r")
-theme_override_styles/pressed = ExtResource("8_g7wm6")
-theme_override_styles/normal = ExtResource("9_7fm0n")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/hover = ExtResource("9_0fyir")
+theme_override_styles/pressed = ExtResource("10_bq8p6")
+theme_override_styles/normal = ExtResource("11_t41m0")
 action_mode = 0
-text = "PLAY
-"
+text = "PLAY"
 
 [node name="background" type="Sprite2D" parent="HUD/game_start_screen/play"]
 modulate = Color(1, 1, 1, 0.25098)
 scale = Vector2(0.5, 0.5)
-texture = SubResource("CompressedTexture2D_hgccq")
+texture = SubResource("CompressedTexture2D_6tfrl")
 
+[node name="game_over_screen" type="Control" parent="HUD"]
+visible = false
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="game_over" type="RichTextLabel" parent="HUD/game_over_screen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -274.5
+offset_top = -165.0
+offset_right = 274.5
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/normal_font = SubResource("SystemFont_upufv")
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/bold_font_size = 60
+bbcode_enabled = true
+text = "[center][b]GAME OVER"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+language = "en"
+
+[node name="message" type="RichTextLabel" parent="HUD/game_over_screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -274.5
+offset_top = -69.0
+offset_right = 274.5
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = SubResource("SystemFont_upufv")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]You survived
+%d floors"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+language = "en"
+
+[node name="play_again" type="Button" parent="HUD/game_over_screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.5
+offset_top = 146.0
+offset_right = 112.5
+offset_bottom = 221.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = ExtResource("9_0fyir")
+theme_override_styles/pressed = ExtResource("10_bq8p6")
+theme_override_styles/normal = ExtResource("11_t41m0")
+action_mode = 0
+text = "PLAY AGAIN"
+
+[node name="background" type="Sprite2D" parent="HUD/game_over_screen/play_again"]
+modulate = Color(1, 1, 1, 0.25098)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("CompressedTexture2D_6tfrl")
+
+[node name="exit" type="Button" parent="HUD/game_over_screen"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 501.0
+offset_top = -279.0
+offset_right = 531.0
+offset_bottom = -249.0
+grow_horizontal = 0
+theme_override_styles/hover = ExtResource("9_0fyir")
+theme_override_styles/pressed = ExtResource("10_bq8p6")
+theme_override_styles/normal = ExtResource("11_t41m0")
+action_mode = 0
+icon = ExtResource("12_riu6h")
+icon_alignment = 2
+vertical_icon_alignment = 0
+expand_icon = true
+
+[connection signal="timeout" from="Timer" to="floor_spawn_point" method="_on_timeout"]
 [connection signal="pressed" from="HUD/game_start_screen/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="HUD/game_over_screen/play_again" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="HUD/game_over_screen/exit" to="." method="_on_exit_pressed"]

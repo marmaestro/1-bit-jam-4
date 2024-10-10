@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dfuxiyowrkrsj"]
+
+[ext_resource type="Texture2D" uid="uid://beioqjl5eu2ff" path="res://materials/uvs/chip_5_uv.png" id="1_yd0te"]
+
+[resource]
+albedo_texture = ExtResource("1_yd0te")
